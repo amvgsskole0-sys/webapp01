@@ -20,6 +20,9 @@ app.get('/', (req, res) => {
 app.get('/index', function(req, res) {
     res.sendFile(path.join(_dirname, '/index.html'));
 });
+app.get("/galaxian", function(req, res) {
+    res.sendFile (path.join(_dirname, "galaxian.html"));
+});
 
 // Start the server and have it listen on the defined port
 app.listen(port, () => {
