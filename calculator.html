@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator – test</title>
+</head>
+<body>
+  <h2>JS Calculator</h2>
+  <!-- Tekstboks der svaret vises -->
+  <input id="display" type="text" placeholder="0" readonly>
+
+  <!--
+    MÅL: Tallknapper i en <table>.
+    Foreløpig finnes bare knappene 1, 2, + og = slik at 1 + 2 = 3 fungerer.
+    Elevene fullfører ved å legge inn flere tallknapper (0–9) og flere operatorer.
+  -->
+  <table>
+    <tr>
+      <td><button onclick="pressDigit('1')">1</button></td>
+      <td><button onclick="pressDigit('2')">2</button></td>
+      <td><button onclick="pressDigit('3')">3</button></td>
+      <td><button onclick="pressOperator('+')">+</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="pressDigit('4')">4</button></td>
+      <td><button onclick="pressDigit('5')">5</button></td>
+      <td><button onclick="pressDigit('6')">6</button></td>
+      <td><button onclick="pressOperator('-')">-</button></td>
+    </tr>
+    <tr>
+      <td><button onclick="pressDigit('7')">7</button></td>
+      <td><button onclick="pressDigit('8')">8</button></td>
+      <td><button onclick="pressDigit('9')">9</button></td>
+      <td><button onclick="pressOperator('*')">*</button></td>
+    </tr>
+    <tr>
+      <td colspan="2"><button onclick="pressDigit('0')">0</button></td>
+      <td><button onclick="pressDigit('.')">.</button></td>
+      <td><button onclick="pressEquals()">=</button></td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td><button onclick="pressClear()">C</button></td>
+    </tr>
+  </table>
+
+  <script>
+    // HELT BASIC LOGIKK – KUN PLUSS (+) ER STØTTET I STARTKODEN
+    // Vi bruker document.getElementById for å oppdatere displayet
+
+    var firstNumber = null;   // f.eks. 1
+    var operator = null;      // f.eks. "+"
+    var currentNumber = '';   // tallet brukeren skriver nå
+
+    function setDisplay(value) {
+      document.getElementById('display').value = String(value);
+    }
+
+    function pressDigit(digit) {
+      currentNumber = currentNumber + digit; // bygger f.eks. "12" når man trykker 1 så 2
+      setDisplay(currentNumber);
+    }
+
+    function pressOperator(op) {
+      if (currentNumber === '') {
+        return; // ingen tall skrevet ennå
+      }
+      firstNumber = Number(currentNumber);
+      operator = op;           // foreløpig bare "+"
+      currentNumber = '';      // klar for neste tall
+    }
+
+    function pressEquals() {
+      if (firstNumber === null || operator === null || currentNumber === '') {
+        return; // mangler noe
+      }
+      var secondNumber = Number(currentNumber);
+      var result = 0;
+
+      if (operator === '+') {
+        result = firstNumber + secondNumber;
+      }
+      // TODO: utvid senere
+      if (operator === '-') { 
+        result = firstNumber - secondNumber; }
+       if (operator === '*') { 
+        result = firstNumber * secondNumber; }
+       if (operator === '/') {
+         result = firstNumber / secondNumber; }
+
+      setDisplay(result);
+
+      // For at elevene kan fortsette å regne videre med resultatet
+      firstNumber = result;
+      currentNumber = '';
+    }
+
+   
+    function pressClear(){
+      // Nullstiller alt
+      firstNumber = null;
+      operator = null;
+      currentNumber = '';
+      setDisplay('');
+    }
+
+    // start med tomt display
+    setDisplay('');
+  </script>
+</body>
+</html>
