@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Bestillingsside</title>
+</head>
+<body>
+  <h1>Bestill produkt</h1>
+
+  <!-- Produktbilde -->
+  <img src="public\images\IMG_20250920_193039_762(1).jpg" alt="Produktbilde" width="300">
+  <h2>^BUY NOW^</h2>
+  <p>Dette produktet er veldig bra!<br>Det har mange funksjoner og passer til alt.<br><br>
+  Bestill her:</p>  
+  <!-- Skjema -->
+  <form id="bestillingsskjema">
+    <p><input id="navn" type="text" placeholder="Navn" required></p>
+    <p><input id="adresse" type="text" placeholder="Adresse" required></p>
+    <p><input id="epost" type="text" placeholder="Epost" required></p>
+    <button type="submit">Bestill</button>
+    <p id="orderConfirmed"></p>
+  </form>
+
+  <script>
+    // Kjør funksjon når skjema sendes inn
+    document.getElementById("bestillingsskjema").addEventListener("submit", function(event) {
+      event.preventDefault(); // hindrer at siden lastes på nytt
+
+      // Hent verdiene fra tekstboksene
+      let navn = document.getElementById("navn").value;
+      let adresse = document.getElementById("adresse").value;
+      let epost = document.getElementById("epost").value;
+
+      // Lag et objekt med informasjonen
+      let bestilling = {
+        navn: navn,
+        adresse: adresse,
+        epost: epost
+      };
+
+      // Her kan du senere sende dette videre til server/API
+      console.log("Bestilling mottatt:", bestilling);
+
+      // Gi tilbakemelding til brukeren
+      alert(`No,you can't buy it ${navn}, bye`);
+      document.getElementById("orderConfirmed").innerText = `Still, no, ${navn}, you wont recive it on ${adresse}🐾`
+      
+    });
+  </script>
+</body>
+</html>
